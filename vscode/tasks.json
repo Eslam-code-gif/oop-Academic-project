@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-project",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "-std=c++17",
+        "-Wall",
+        "-Wextra",
+        "-g3",
+        "-Iinclude", 
+        "main.cpp",
+        "Src/*.cpp",
+        "-o",
+        "output/main.exe"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Compile the project by including header files from 'include' and all source files from 'Src'."
+    },
+    {
+      "label": "build-and-create-batch",
+      "type": "shell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "g++ -std=c++17 -Wall -Wextra -g3 -Iinclude main.cpp Src/*.cpp -o output/main.exe && echo @echo off > output/run.bat && echo cd /d %%~dp0 >> output/run.bat && echo output\\main.exe >> output/run.bat && echo pause >> output/run.bat"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Build the project and create a batch file for running the executable."
+    }
+  ]
+}
